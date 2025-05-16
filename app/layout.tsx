@@ -5,8 +5,6 @@ import { Dock } from "@/components/macro/dock"
 
 import "./globals.css"
 
-import { SplashScreen } from "@/components/wrapper/splash"
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -33,7 +31,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${calistoga.variable} font-sans antialiased`}
       >
-        <SplashScreen />
         <Dock />
         <main>{children}</main>
       </body>
