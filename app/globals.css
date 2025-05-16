@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer utilities {
+  main {
+    transition-property: opacity, transform, filter, background;
+    transition-timing-function: ease-in-out;
+    transition-duration: 500ms;
+  }
+
+  .page-transition {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(24px);
+  }
+
   .text-balance {
     text-wrap: balance;
   }

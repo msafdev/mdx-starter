@@ -11,10 +11,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import "@/styles/mdx.css"
 
-import { ArrowLeft } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-
 interface PostPageProps {
   params: {
     slug: string[]
@@ -88,7 +84,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
           {/* Profile */}
           <div className="mb-6 flex items-center justify-center gap-3">
-            <Avatar className="rounded-md">
+            <Avatar className="rounded-md border">
               <AvatarImage
                 src="https://github.com/msafdev.png"
                 alt="@msafdev"
@@ -124,12 +120,6 @@ export default async function PostPage({ params }: PostPageProps) {
 
           {/* MDX Wrapper */}
           <Mdx code={post.body} />
-
-          <div className="mt-8 flex justify-center gap-3">
-            <Button variant={"default"} size={"icon"} className="size-8 p-0">
-              <ArrowLeft size={16} />
-            </Button>
-          </div>
         </div>
       </div>
     </article>

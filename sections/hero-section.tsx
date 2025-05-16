@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button"
 
 export const HeroSection = () => {
   return (
-    <section id="hero" className="relative z-0 min-h-svh py-32">
+    <section
+      id="hero"
+      className="relative z-0 min-h-svh py-32 flex flex-col justify-center"
+    >
       {/* Mask */}
       <div className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]">
         <div

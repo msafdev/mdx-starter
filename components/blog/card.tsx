@@ -6,6 +6,8 @@ import { cn, formatDate } from "@/lib/utils"
 import { Tag } from "@/components/macro/tag"
 import { buttonVariants } from "@/components/ui/button"
 
+import { TransitionLink } from "@/components/wrapper/link"
+
 interface CardProps {
   slug: string
   title: string
@@ -35,12 +37,12 @@ export function Card({ slug, title, description, date, tags }: CardProps) {
             <time dateTime={date}>{formatDate(date)}</time>
           </dd>
         </dl>
-        <Link
+        <TransitionLink
           href={"/" + slug}
           className={cn(buttonVariants({ variant: "link" }), "py-0")}
         >
           Read more →
-        </Link>
+        </TransitionLink>
       </div>
     </article>
   )
