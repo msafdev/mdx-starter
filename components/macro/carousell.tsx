@@ -102,7 +102,7 @@ export function PeopleCarousel({ items }: { items: PeopleCarouselProps[] }) {
                     src={person.src || "/placeholder.svg"}
                     alt={person.username}
                   />
-                  <AvatarFallback className="rounded-md">
+                  <AvatarFallback className="rounded-md text-muted-foreground">
                     {person.username.slice(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -124,7 +124,7 @@ export function PeopleCarousel({ items }: { items: PeopleCarouselProps[] }) {
             <SectionDescription contentSize="sm">
               {items[currentIndex].text}
             </SectionDescription>
-            <span className="text-sm font-serif mt-4">
+            <span className="text-sm font-serif mt-4 text-foreground">
               {items[currentIndex].name} - {items[currentIndex].role}
             </span>
           </motion.div>

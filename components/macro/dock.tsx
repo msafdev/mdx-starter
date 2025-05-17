@@ -40,7 +40,9 @@ export const Dock = () => {
               key={item.label}
               href={item.href}
               className="header-item"
+              aria-label={`Go to ${item.href}`}
             >
+              <span className="sr-only">Go to {item.label}</span>
               <item.icon className="size-4" />
             </TransitionLink>
           ) : (
@@ -50,6 +52,7 @@ export const Dock = () => {
               className="header-item"
               aria-label={`Go to ${item.href}`}
             >
+              <span className="sr-only">Go to {item.label}</span>
               <item.icon className="size-4" />
             </Link>
           )
