@@ -44,7 +44,12 @@ export const Dock = () => {
               <item.icon className="size-4" />
             </TransitionLink>
           ) : (
-            <Link key={item.label} href={item.href} className="header-item">
+            <Link
+              key={item.label}
+              href={item.href}
+              className="header-item"
+              aria-label={`Go to ${item.href}`}
+            >
               <item.icon className="size-4" />
             </Link>
           )
