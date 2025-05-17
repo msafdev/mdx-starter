@@ -5,18 +5,17 @@ import { AnimatePresence, motion } from "framer-motion"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+import { SectionDescription } from "./header"
+
 type PeopleCarouselProps = {
   name: string
   username: string
   src: string
   role: string
+  text: string
 }
 
-export default function PeopleCarousel({
-  items,
-}: {
-  items: PeopleCarouselProps[]
-}) {
+export function PeopleCarousel({ items }: { items: PeopleCarouselProps[] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState(1)
@@ -28,7 +27,6 @@ export default function PeopleCarousel({
 
       setCurrentIndex((current) => (current + 1) % items.length)
 
-      // Reset transitioning state after animation completes
       const timeout = setTimeout(() => {
         setIsTransitioning(false)
       }, 500)
@@ -74,44 +72,64 @@ export default function PeopleCarousel({
   })
 
   return (
-    <div className="w-full max-w-2xl mx-auto relative h-12 flex items-center justify-center">
-      <div className="relative w-full flex justify-center items-center">
+    <div className="w-full max-w-2xl mx-auto relative flex flex-col items-center gap-y-6">
+      {/* Avatar Carousel */}
+      <div className="flex flex-col gap-8">
         <AnimatePresence>
-          {visibleItems.map(({ person, index, positionIndex, isVisible }) => {
-            if (!isVisible) return null
-
-            const position = positions[positionIndex]
-
-            return (
-              <motion.div
-                key={`person-${index}`}
-                className="absolute flex flex-col items-center"
-                layout
-                initial={false}
-                animate={{
-                  x: position.x,
-                  opacity: position.opacity,
-                  scale: position.scale,
-                  zIndex: position.zIndex,
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeInOut",
-                  layout: { duration: 0.5 },
-                }}
-              >
-                <Avatar className="size-12 rounded-md border shadow-sm">
-                  <AvatarImage
-                    src={person.src || "/placeholder.svg"}
-                    alt={person.username}
-                  />
-                  <AvatarFallback className="rounded-md">
-                    {person.username.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              </motion.div>
-            )
-          })}
+          <>
+            <div className="relative w-full flex justify-center items-center h-12">
+              {visibleItems.map(
+                ({ person, index, positionIndex, isVisible }) => {
+                  if (!isVisible) return null
+                  const position = positions[positionIndex]
+                  return (
+                    <motion.div
+                      key={`person-${index}`}
+                      className="absolute flex flex-col items-center"
+                      layout
+                      initial={false}
+                      animate={{
+                        x: position.x,
+                        opacity: position.opacity,
+                        scale: position.scale,
+                        zIndex: position.zIndex,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeInOut",
+                        layout: { duration: 0.5 },
+                      }}
+                    >
+                      <Avatar className="size-12 rounded-md border shadow-sm">
+                        <AvatarImage
+                          src={person.src || "/placeholder.svg"}
+                          alt={person.username}
+                        />
+                        <AvatarFallback className="rounded-md">
+                          {person.username.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    </motion.div>
+                  )
+                }
+              )}
+            </div>
+            <motion.div
+              key={items[currentIndex].username}
+              className="flex flex-col max-w-lg text-wrap text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <SectionDescription contentSize="sm">
+                {items[currentIndex].text}
+              </SectionDescription>
+              <span className="text-sm font-serif mt-4">
+                {items[currentIndex].name} - {items[currentIndex].role}
+              </span>
+            </motion.div>
+          </>
         </AnimatePresence>
       </div>
     </div>

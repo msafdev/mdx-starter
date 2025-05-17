@@ -1,6 +1,4 @@
-import PeopleCarousel from "@/components/macro/carousell"
-import { SectionDescription } from "@/components/macro/header"
-import { TextLoop } from "@/components/motion-primitives/text-loop"
+import { PeopleCarousel } from "@/components/macro/carousell"
 
 const PEOPLE_ITEMS = [
   {
@@ -45,21 +43,6 @@ export const PeopleSection = () => {
     <section id="people" className="relative z-0">
       <div className="container flex flex-col items-center gap-y-6 md:gap-y-8">
         <PeopleCarousel items={PEOPLE_ITEMS} />
-        <TextLoop className="font-mono text-sm" interval={3}>
-          {PEOPLE_ITEMS.map((item) => (
-            <div
-              key={item.username}
-              className="flex flex-col max-w-lg text-wrap"
-            >
-              <SectionDescription contentSize="sm">
-                {item.text}
-              </SectionDescription>
-              <span className="text-center text-sm font-serif mt-4">
-                {item.name} - {item.role}
-              </span>
-            </div>
-          ))}
-        </TextLoop>
       </div>
     </section>
   )
