@@ -1,0 +1,255 @@
+---
+title: "How To Use"
+description: "Full guide on how to use this template to it's full potential"
+date: 2025-05-23
+tags: ["guide", "cheatsheet"]
+published: true
+image: "/images/blog/space.webp"
+---
+
+Full tutorial on how to use Salman's [.mdx portfolio template](https://github.com/msafdev/mdx-starter)
+
+---
+
+## 1. Create Your Repository
+
+Start by creating a new repo from this template:  
+[Use this Template](https://github.com/new?template_name=mdx-starter&template_owner=msafdev)
+
+- Repository name: Use only lowercase letters and hyphens (`my-mdx-site`)
+- Click "Create repository from template"
+
+---
+
+## 2. Set Up Locally
+
+### Clone and Install
+
+```bash
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+cd YOUR_REPO_NAME
+
+npm install
+```
+
+### Run the Dev Server
+
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 3. Folder Structure
+
+Below is a simplified structure based on the actual project:
+
+```
+.
+├── app/
+│   ├── api/
+│   │   └── og/
+│   │       └── route.tsx             # Dynamic OG image API route
+│   ├── blog/
+│   │   ├── [slug]/page.tsx           # Dynamic blog post rendering
+│   │   └── page.tsx                  # Blog index page
+│   ├── favicon.ico
+│   ├── globals.css                   # Global styles
+│   ├── layout.tsx                    # Root layout (App Router)
+│   └── page.tsx                      # Homepage
+├── assets/                           # Static or compiled asset files
+├── components/
+│   ├── blog/                         # Blog-specific components
+│   ├── macro/                        # Utility UI wrappers or helpers
+│   ├── motion/                       # Motion/animation utilities
+│   ├── sections/                     # Homepage or landing page sections
+│   ├── shared/                       # Reusable shared UI (e.g., containers, cards)
+│   └── ui/                           # Generic UI elements (buttons, inputs, etc.)
+│   └── theme-provider.tsx            # Theme context and dark mode handling
+├── content/                          # MDX content goes here
+├── lib/
+│   ├── constants.ts                  # Global constants
+│   └── utils.ts                      # Utility functions
+├── public/
+│   ├── icons/
+│   ├── images/
+│   │   └── blog/
+│   │       └── placeholder.webp      # Blog image placeholder
+├── styles/
+│   └── mdx.css                       # Custom MDX styling rules
+```
+
+---
+
+## 4. Key File & Folder Descriptions
+
+### `/app/layout.tsx`
+Defines the root layout shared by all routes. Sets up fonts, theme provider, metadata, and wraps children in a global UI shell.
+
+### `/app/page.tsx`
+Home page of the site — can use components from `sections/`.
+
+### `/app/blog/page.tsx`
+Renders a list or index of all blog posts, likely pulling from MDX metadata.
+
+### `/app/blog/[slug]/page.tsx`
+Dynamic route that renders each individual blog post, parsing frontmatter and rendering MDX.
+
+---
+
+## 5. Components Organization
+
+- **`components/blog/`**: Components specifically tied to blog layout (e.g., `PostHeader.tsx`, `MDXRenderer.tsx`)
+- **`components/macro/`**: Composable helpers, maybe for layout abstractions or macro styling
+- **`components/motion/`**: Animation wrappers using libraries like Framer Motion
+- **`components/sections/`**: Page sections such as Hero, Features, Newsletter
+- **`components/shared/`**: Reusable blocks shared across different pages (e.g., `Container`, `Card`)
+- **`components/ui/`**: Primitive components like buttons, inputs, toggles
+
+---
+
+## 6. Theming & Styling
+
+### `components/theme-provider.tsx`
+
+Sets up dark/light mode support using `next-themes`, and optionally Tailwind config tokens.
+
+### `/styles/mdx.css`
+
+This file contains custom styles specifically for rendering MDX content, e.g., typography, code blocks, blockquotes.
+
+---
+
+## 7. MDX Content Structure
+
+Store MDX files under `content/`, such as:
+
+```
+content/
+├── index.mdx
+├── about.mdx
+└── blog/
+    ├── first-post.mdx
+    └── second-post.mdx
+```
+
+Use frontmatter for metadata:
+
+```mdx
+---
+title: "First Post"
+description: "Intro to MDX"
+date: "2025-05-01"
+---
+
+# First Post
+
+This blog post is written in MDX and supports React components.
+```
+
+---
+
+## 8. Utilities
+
+### `lib/constants.ts`
+
+Define site-wide constants like metadata, social handles, etc.
+
+### `lib/utils.ts`
+
+Helper functions such as `cn()` (for conditional classnames), or date formatting.
+
+---
+
+## 9. Public Assets
+
+The `public/` folder contains:
+
+- `icons/`: SVG icons
+- `images/blog/`: Blog images or cover photos
+
+Use these with the `Image` component for optimized delivery.
+
+---
+
+# 10. Update the Repository
+
+After making your local changes, commit and push them to your GitHub repo.
+
+### Stage and Commit Changes
+
+```bash
+git add .
+
+git commit -m "feat: new updates"
+```
+
+### Push to GitHub
+
+```bash
+git push origin main # Or `origin master`
+```
+
+If not, you can set it:
+
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+```
+
+---
+
+# 11. Deploy to Vercel
+
+### Step 1: Login to Vercel
+
+Go to [https://vercel.com](https://vercel.com) and sign in with GitHub.
+
+### Step 2: Import the Project
+
+1. Click **“Add New → Project”**
+2. Select your GitHub repository
+3. Confirm the settings (it should auto-detect Next.js)
+4. Keep the build command as:
+
+```bash
+npm install
+npm build
+```
+
+Vercel will automatically set the correct framework preset.
+
+### Step 3: Environment Variables (Optional)
+
+If your MDX starter requires environment variables (e.g., for SEO, analytics, or image hosting), you can set them under the **"Environment Variables"** tab.
+
+Add any variables required by your project (e.g., `NEXT_PUBLIC_SITE_URL`).
+
+---
+
+# 12. Live URL
+
+Once deployed, Vercel will give you a `.vercel.app` URL like:
+
+```bash
+https://your-mdx-site.vercel.app
+```
+
+You can also set a custom domain in your project dashboard under **Settings → Domains**.
+
+---
+
+# 13. Done
+
+> If anything unwanted happens, hit me up [here](https://instagram.com/msalman_af)
+
+Your project is now live, and the structure is optimized for long-term maintainability.
+
+Next steps:
+
+- Add more content to `content/blog/`
+- Customize UI components in `components/`
+- Extend layouts and styles for your branding
+
+Stay consistent with your structure and follow Next.js best practices for performance and maintainability.
